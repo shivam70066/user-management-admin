@@ -13,4 +13,8 @@ export class AuthService {
     return this.http.post<LoginResponseData>('http://localhost:3000/auth/login', data);
   }
 
+  me(){
+    return this.http.get('http://localhost:3000/auth/me');
+  }
+
 }

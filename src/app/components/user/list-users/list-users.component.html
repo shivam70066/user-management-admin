@@ -5,14 +5,14 @@
 
     <mat-form-field class="example-form-field">
       <mat-label>Search</mat-label>
-      <input matInput type="text" [(ngModel)]="value" (input)="search()" >
+      <input matInput type="text" [(ngModel)]="value" (input)="search()">
       @if (value) {
-        <button matSuffix mat-icon-button aria-label="Clear" class="cross-icon" (click)="clearSearch()">
-          <mat-icon>close</mat-icon>
-        </button>
+      <button matSuffix mat-icon-button aria-label="Clear" class="cross-icon" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
       }
     </mat-form-field>
-    <button mat-flat-button color="primary" [routerLink]="['add-user']" >Add User</button>
+    <button mat-flat-button color="primary" [routerLink]="['add-user']">Add User</button>
   </div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -21,77 +21,93 @@
         <tr>
           <th scope="col" class="px-6 py-3" style="width: 15%;">
             <div style="display: flex; align-items: center;" id="header-div">
-                <a (click)="sort('user_name')">Name</a>
-                @if(sortBy=="user_name"){
-                  @if(sortOrder=="asc"){
-                    <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
-                  }
-                  @else {
-                    <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
-                  }
-                }
-            </div>
-        </th>
-        <th scope="col" class="px-6 py-3" style="width: 20%;">
-          <div style="display: flex; align-items: center;" id="header-div">
-            <a (click)="sort('user_email')" >Email</a>
-              @if(sortBy=="user_email"){
-                @if(sortOrder=="asc"){
-                  <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
-                }
-                @else {
-                  <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
-                }
-              }
-          </div>
-      </th>
-      <th scope="col" class="px-6 py-3" style="width: 10%;">
-        <div style="display: flex; align-items: center;" id="header-div">
-            <a (click)="sort('user_gender')" >Gender</a>
-            @if(sortBy=="user_gender"){
+              <a (click)="sort('user_name')">Name</a>
+              @if(sortBy=="user_name"){
               @if(sortOrder=="asc"){
-                <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
               }
               @else {
-                <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
-              }
-            }
-        </div>
-    </th>
-    <th scope="col" class="px-6 py-3"  style="width: 10%;">
-      <div style="display: flex; align-items: center;" id="header-div">
-          <a (click)="sort('user_number')" >Number</a>
-          @if(sortBy=="user_number"){
-            @if(sortOrder=="asc"){
-              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
-            }
-            @else {
               <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
-            }
-          }
-      </div>
-  </th>
-  <th scope="col" class="px-6 py-3" style="width: 20%;">
-    <div style="display: flex; align-items: center;" id="header-div">
-        <a (click)="sort('user_created_at')" >Created Time</a>
-        @if(sortBy=="user_created_at"){
-          @if(sortOrder=="asc"){
-            <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
-          }
-          @else {
-            <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
-          }
-        }
-    </div>
-</th>
+              }
+              }
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3" style="width: 20%;">
+            <div style="display: flex; align-items: center;" id="header-div">
+              <a (click)="sort('user_email')">Email</a>
+              @if(sortBy=="user_email"){
+              @if(sortOrder=="asc"){
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
+              }
+              @else {
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
+              }
+              }
+            </div>
+          </th>
+
+          <th scope="col" class="px-6 py-3" style="width: 10%;">
+            <div style="display: flex; align-items: center;" id="header-div">
+              <a (click)="sort('user_role')">Role</a>
+              @if(sortBy=="user_number"){
+              @if(sortOrder=="asc"){
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
+              }
+              @else {
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
+              }
+              }
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3" style="width: 10%;">
+            <div style="display: flex; align-items: center;" id="header-div">
+              <a (click)="sort('user_gender')">Gender</a>
+              @if(sortBy=="user_gender"){
+              @if(sortOrder=="asc"){
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
+              }
+              @else {
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
+              }
+              }
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3" style="width: 10%;">
+            <div style="display: flex; align-items: center;" id="header-div">
+              <a (click)="sort('user_number')">Number</a>
+              @if(sortBy=="user_number"){
+              @if(sortOrder=="asc"){
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
+              }
+              @else {
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
+              }
+              }
+            </div>
+          </th>
+
+          <th scope="col" class="px-6 py-3" style="width: 20%;">
+            <div style="display: flex; align-items: center;" id="header-div">
+              <a (click)="sort('user_created_at')">Created Time</a>
+              @if(sortBy=="user_created_at"){
+              @if(sortOrder=="asc"){
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
+              }
+              @else {
+              <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_downward</mat-icon>
+              }
+              }
+            </div>
+          </th>
 
           <th scope="col" class="px-6 py-3">
-            Deatils
+            Details
           </th>
           <th scope="col" class="px-6 py-3">
             Actions
 
           </th>
+
         </tr>
       </thead>
       <tbody>
@@ -121,6 +137,9 @@
             {{data.user_email}}
           </td>
           <td class="px-6 py-4">
+            {{data.um_roles.role_name}}
+          </td>
+          <td class="px-6 py-4">
             {{data.user_gender}}
           </td>
           <td class="px-6 py-4">
@@ -130,16 +149,17 @@
             {{convertTimestampToDateTime(data.user_created_at)}}
           </td>
           <td class="px-6 py-4">
-            <a [routerLink]="['user/', data.user_id]" class="font-medium  hover:underline " style="text-align: center;">Full
+            <a [routerLink]="['user/', data.user_id]" class="font-medium  hover:underline "
+              style="text-align: center;">Full
               details</a>
           </td>
           <td class="px-6 py-4">
             <a [routerLink]="['update/', data.user_id]" class="font-medium  hover:underline "
               style="text-align: center;">Edit</a>
-            <a  class="font-medium  hover:underline mx-5" style="text-align: center;" (click)="delete(data.user_id)">Delete</a>
-
-
+            <a class="font-medium  hover:underline mx-5" style="text-align: center;"
+              (click)="delete(data.user_id)">Delete</a>
           </td>
+
         </tr>
         }
         @empty {
@@ -163,8 +183,8 @@
   </div>
 </div>
 
-<!-- for accessing stateVariable -->
-<!-- State variable(role): {{roleName$ | async}}
-<br>
-<button  style="padding: 8px; background-color: #673ab7; color: white;">Change stateVar for Checking on refresh </button> -->
 
+<!--
+{{roleName$ | async}}
+{{id$| async}}
+<button (click)="setID()" >jhbdhbjdbgd</button> -->

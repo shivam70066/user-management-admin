@@ -19,11 +19,11 @@ import { Observable } from 'rxjs';
 import { UsersService } from "../../../services/users.service";
 import { response } from "express";
 import { usersData } from "../../../../interfaces/interfaces";
-import { addTokenInterceptor } from "../../../interceptor/add-token.interceptor";
-// import { AppState } from '../../states/app.state';
-// import { Store } from '@ngrx/store';
-// import { selectRole } from '../../states/roleState/role.selector';
-// import { setRole } from '../../states/roleState/role.actions';
+import { AppState } from "../../../states/app.state";
+import { Store } from "@ngrx/store";
+import { selectID, selectRole } from "../../../states/roleState/role.selector";
+import { setID, setRole } from "../../../states/roleState/role.actions";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: 'app-list-users',
@@ -44,9 +44,25 @@ import { addTokenInterceptor } from "../../../interceptor/add-token.interceptor"
 })
 export class ListUsersComponent implements OnInit {
 
+  constructor(private toastr: ToastrService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {
+    this.authServices.me().subscribe({
+      next: (resp:any)=>{
+        this.store.dispatch(setRole({ role_slug: resp.data.role_slug }));
+        this.store.dispatch(setID({ id: resp.data.id }));
+      }
+    })
+    this.roleName$ = this.store.select(selectRole)
+    this.id$ = this.store.select(selectID)
+  }
+
+  id$?: Observable<number>;
   roleName$?: Observable<string>;
   isloading = true;
   dataService = inject(UsersService)
+  authServices: AuthService= inject(AuthService);
   msg?: number;
   fullDataSize!: number;
   start: number = 0;
@@ -63,9 +79,13 @@ export class ListUsersComponent implements OnInit {
   debounceTimeout: any;
 
 
-  // setRole(){
-  //   this.store.dispatch(setRole({ role_slug: 'changed' }));
-  // }
+  setRole() {
+    this.store.dispatch(setRole({ role_slug: 'changed' }));
+  }
+
+  setID() {
+    this.store.dispatch(setID({ id: 1 }))
+  }
 
 
 
@@ -104,6 +124,7 @@ export class ListUsersComponent implements OnInit {
         next: (response: usersData) => {
           this.data = response;
           this.msg = this.data.status;
+          console.log(response)
           if (this.msg != 200) {
             this.showError();
           }
@@ -149,8 +170,6 @@ export class ListUsersComponent implements OnInit {
     }
   }
 
-  constructor(private toastr: ToastrService, private router: Router) {
-  }
 
 
 

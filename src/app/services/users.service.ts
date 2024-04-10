@@ -1,6 +1,7 @@
+import { ChangePasswordComponent } from './../components/settings/change-password/change-password.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { usersData } from '../../interfaces/interfaces';
+import { ChangePasswordData, usersData } from '../../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class UsersService {
 
   updateUser(id:number,data:any){
     return this.httpClient.put("http://localhost:3000/users/"+id,data);
+  }
+
+  changePassword(data:any,id:number){
+    return this.httpClient.put("http://localhost:3000/users/changePassword/"+id,data);
   }
 
 

@@ -5,13 +5,28 @@
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title style="color: white;">
-          General Settings
+          Settings
         </mat-panel-title>
         <mat-panel-description>
-          User Details, Format(date/time)
+          Change Password, General settings
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>Comin soon</p>
+      <div class="content">
+        <table>
+          <tr>
+            <th id="table_left">Setting Name</th>
+            <th>Action</th>
+          </tr>
+
+          <tr>
+            <td>Change Password</td>
+            <td><a routerLink="change-password">Link</a></td>
+          </tr>
+
+        </table>
+
+
+      </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -29,15 +44,15 @@
         <table>
           <tr>
             <th id="table_left">Template Name</th>
-            <th >Edit</th>
+            <th>Edit</th>
           </tr>
           @for (template of templateData; track template.et_id) {
 
-            <tr>
-              <td>{{template.et_name}}</td>
-              <td><a routerLink="email-template/{{template.et_slug}}">Link</a></td>
-            </tr>
-        }
+          <tr>
+            <td>{{template.et_name}}</td>
+            <td><a routerLink="email-template/{{template.et_slug}}">Link</a></td>
+          </tr>
+          }
 
         </table>
 

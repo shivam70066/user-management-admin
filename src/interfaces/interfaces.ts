@@ -42,3 +42,9 @@ export interface  UpdateEmailTemplateData{
   subject:string,
   body:string
 }
+
+export interface ChangePasswordData{
+  newPassword: string |null,
+  oldPassword: string |null,
+  id:number
+}

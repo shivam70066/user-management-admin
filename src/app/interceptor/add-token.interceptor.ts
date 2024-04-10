@@ -8,6 +8,7 @@ export const addTokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   const _router = inject(Router)
   const token = localStorage.getItem('token')
+  // console.log("interceptor")
 
   if(token){
     const reqWithHeader = req.clone({
