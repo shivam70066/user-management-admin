@@ -1,0 +1,37 @@
+<div id="content">
+  <div id="body">
+    <h1>
+     Admin Log In
+    </h1>
+    <div id="form-body">
+
+      <form [formGroup]="userform" (ngSubmit)="userform.valid && login()">
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+          @if(userform.get('email')?.hasError('required')){
+          <mat-error>Email is <strong>required</strong></mat-error>
+          }@else if (userform.get('email')?.hasError('pattern')) {
+          <mat-error>Enter a valid email</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput [type]="hide ? 'text' : 'password'" formControlName="password" placeholder="*********">
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+          @if(userform.get('password')?.hasError('required')){
+          <mat-error>Password is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+
+        <button type="submit" id="btn">Log In</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+

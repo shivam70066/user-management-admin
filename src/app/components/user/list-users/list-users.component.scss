@@ -1,0 +1,41 @@
+
+/* styles.css or styles.scss */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+#content{
+  width: 90%;
+  margin: 2% auto;
+}
+
+td a{
+  color: #673ab7;
+  cursor: pointer;
+}
+tr:hover a{
+  color: white;
+}
+a{
+  cursor: pointer;
+}
+#search_btn{
+  color: white;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 20px;
+}
+table{
+  margin-bottom: 10px;
+}
+.example-form-field{
+  width: 20%;
+}
+.cross-icon{
+  margin: 10px;
+  color: rgb(151, 34, 34);
+
+}
+.cross-icon:hover{
+  color: red;
+}
+
+

@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<div id="content">
+  <div id="body">
+    <h1>
+      Add User
+    </h1>
+    <div id="form-body">
+      <form [formGroup]="userform" (ngSubmit)="userform.valid && save()">
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput formControlName="name" placeholder="Alex watson">
+          @if(userform.get('name')?.hasError('required')){
+          <mat-error>Name is <strong>required</strong></mat-error>
+          }@else if (userform.get('name')?.hasError('pattern')) {
+          <mat-error>Enter a valid name</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+
+          @if(valid){
+          <mat-error>Email is <strong>required</strong></mat-error>
+          }
+          @if(userform.get('email')?.hasError('required')){
+          <mat-error>Email is <strong>required</strong></mat-error>
+          }@else if (userform.get('email')?.hasError('email')) {
+          <mat-error>Enter a valid email</mat-error>
+          }
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput  [type]="hide ? 'text' : 'password'" formControlName="password" placeholder="*********">
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          @if(userform.get('password')?.hasError('required')){
+            <mat-error>Password is <strong>required</strong></mat-error>
+            }@else if (userform.get('password')?.hasError('pattern')) {
+            <mat-error>Password must contain 8 chars,a special, upper, lower and a digit</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Choose Role</mat-label>
+          <mat-select formControlName="role_slug" name="roleID">
+              <mat-option value="admin">Admin</mat-option>
+              <mat-option value="manager">Manager</mat-option>
+              <mat-option value="team_lead">Team Lead</mat-option>
+              <mat-option value="employee">Employee</mat-option>
+          </mat-select>
+          @if (userform.get('role_slug')?.hasError('required')) {
+            <mat-error>Role is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Number</mat-label>
+          <input type="number" matInput formControlName="number" placeholder="123456780">
+          @if(userform.get('number')?.hasError('required')){
+          <mat-error>Number is <strong>required</strong></mat-error>
+          }@else if (userform.get('number')?.hasError('pattern')) {
+          <mat-error>Enter a valid 10 digit number</mat-error>
+          }
+
+        </mat-form-field>
+        <div id="radioDiv">
+          <mat-radio-group aria-label="Select an option" formControlName="gender" color="primary"
+            style="margin-top: 0px;">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div id="btns-div">
+          <button mat-flat-button color="primary"  type="submit">Add</button>
+          <button mat-flat-button color="warn" routerLink="/users">Back</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

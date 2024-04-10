@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+@if(isLoading){
+  <div class="flex justify-center items-center h-screen">
+    <div class="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600"></div>
+  </div>
+}
+@else {
+
+  <div id="setting-div">
+    <h2>Edit Email Template</h2>
+    <h3>{{templateData.et_name}}</h3>
+    <hr>
+    <table>
+      <tr>
+        <th>Subject:</th>
+        <mat-form-field id="full">
+          <input matInput type="text" [(ngModel)]="templateData.et_subject" placeholder="Subject"  >
+        </mat-form-field>
+      </tr>
+      <tr>
+        <th>Body:</th>
+        <td style="max-width: 200px;"><ckeditor [editor]="Editor" [(ngModel)]="templateData.et_data" id="ck_style" ></ckeditor></td>
+      </tr>
+    </table>
+
+    <div id="btns-div">
+      <button mat-flat-button color="primary" (click)="updateTemplate()">Save</button>
+      <button mat-flat-button color="warn" routerLink="/settings">Back</button>
+    </div>
+
+</div>
+
+}
+
+

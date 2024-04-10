@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div id="setting-div">
+  <h2>Settings</h2>
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title style="color: white;">
+          General Settings
+        </mat-panel-title>
+        <mat-panel-description>
+          User Details, Format(date/time)
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>Comin soon</p>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title style="color: white;">
+          Email Templates
+        </mat-panel-title>
+        <mat-panel-description>
+          View/Edit templates
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+
+      <div class="content">
+        <table>
+          <tr>
+            <th id="table_left">Template Name</th>
+            <th >Edit</th>
+          </tr>
+          @for (template of templateData; track template.et_id) {
+
+            <tr>
+              <td>{{template.et_name}}</td>
+              <td><a routerLink="email-template/{{template.et_slug}}">Link</a></td>
+            </tr>
+        }
+
+        </table>
+
+
+      </div>
+    </mat-expansion-panel>
+
+
+
+  </mat-accordion>
+</div>

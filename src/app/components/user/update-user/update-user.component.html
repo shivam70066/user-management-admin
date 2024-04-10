@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<div id="content">
+  <div id="body">
+    <h1>
+      Update
+    </h1>
+    @if(userData) {
+      <div id="form-body">
+        <form [formGroup]="userform" (ngSubmit)="userform.valid && save()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput formControlName="name" placeholder="Alex watson" [value]="userData.data.user_name">
+            @if(userform.get('name')?.hasError('required')){
+            <mat-error>Name is <strong>required</strong></mat-error>
+            }@else if (userform.get('name')?.hasError('pattern')) {
+            <mat-error>Enter a valid name</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+
+            @if(valid){
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+            @if(userform.get('email')?.hasError('required')){
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }@else if (userform.get('email')?.hasError('email')) {
+            <mat-error>Enter a valid email</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Choose Role</mat-label>
+            <mat-select formControlName="roleID" name="roleID">
+                <mat-option [value]="14">Admin</mat-option>
+                <mat-option [value]="15">Manager</mat-option>
+                <mat-option [value]="16">Team Lead</mat-option>
+                <mat-option [value]="17">Employee</mat-option>
+            </mat-select>
+            @if (userform.get('roleID')?.hasError('required')) {
+              <mat-error>Role is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Number</mat-label>
+            <input type="number" matInput formControlName="number" placeholder="123456780">
+            @if(userform.get('number')?.hasError('required')){
+            <mat-error>Number is <strong>required</strong></mat-error>
+            }@else if (userform.get('number')?.hasError('pattern')) {
+            <mat-error>Enter a valid 10 digit number</mat-error>
+            }
+
+          </mat-form-field>
+          <div id="radioDiv">
+            <mat-radio-group aria-label="Select an option" formControlName="gender" color="primary"
+              style="margin-top: 0px;">
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <button id="btn" type="submit">Update</button>
+        </form>
+      </div>
+    }
+  </div>
+
+</div>
