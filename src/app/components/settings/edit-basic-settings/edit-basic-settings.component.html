@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div id="content">
+  <div id="body">
+    <h1 style="font-weight: 400;">
+      Basic Settings
+    </h1>
+    @if(userData) {}
+    @else {
+      <div id="form-body">
+        <!-- <form [formGroup]="userform" (ngSubmit)="userform.valid && save()"> -->
+
+          <form [formGroup]="userform" (ngSubmit)="userform.valid && update()">
+            <div id="seting-div">
+
+              <table>
+                <tr>
+                  <td>
+                    <p class="p-style">Rows Per Page :</p>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-select formControlName="rowsPerPage" name="rowsPerPage">
+                        <mat-option [value]="2" >2</mat-option>
+                        <mat-option [value]="5" >5</mat-option>
+                        <mat-option [value]="10" >10</mat-option>
+                        <mat-option [value]="15" >15</mat-option>
+                      </mat-select>
+                      <!-- @if (userform.get('roleID')?.hasError('required')) {
+                        <mat-error>Role is <strong>required</strong></mat-error>
+                      } -->
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+
+
+          <button id="btn" type="submit">Save</button>
+        </form>
+      </div>
+    }
+  </div>
+
+</div>

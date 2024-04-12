@@ -24,6 +24,7 @@ import { Store } from "@ngrx/store";
 import { selectID, selectRole } from "../../../states/roleState/role.selector";
 import { setID, setRole } from "../../../states/roleState/role.actions";
 import { AuthService } from "../../../services/auth.service";
+import { BasicSettingsService } from "../../../services/basic-settings.service";
 
 @Component({
   selector: 'app-list-users',
@@ -63,6 +64,7 @@ export class ListUsersComponent implements OnInit {
   isloading = true;
   dataService = inject(UsersService)
   authServices: AuthService= inject(AuthService);
+  settingService : BasicSettingsService = inject(BasicSettingsService);
   msg?: number;
   fullDataSize!: number;
   start: number = 0;
@@ -94,7 +96,7 @@ export class ListUsersComponent implements OnInit {
     this.debounceTimeout = setTimeout(() => {
       this.searchTerm = this.value;
       this.getData(this.pageIndex, this.pageSize, this.searchTerm, this.sortBy, this.sortOrder);
-    }, 500); // Adjust debounce time as needed
+    }, 500);
     this.pageIndex = 0
   }
 
@@ -108,7 +110,14 @@ export class ListUsersComponent implements OnInit {
   newData: any;
 
   ngOnInit(): void {
-    this.getData(this.pageIndex, this.pageSize, this.searchTerm, this.sortBy, this.sortOrder)
+    this.settingService.getSettingsData().subscribe({
+      next:(resp:any)=>{
+        this.pageSize= resp.data.filter((obj: any) => obj.setting_key === "rows_per_page")[0].setting_value;
+        this.pagePerItem= resp.data.filter((obj: any) => obj.setting_key === "rows_per_page")[0].setting_value;
+        this.getData(this.pageIndex, this.pageSize, this.searchTerm, this.sortBy, this.sortOrder);
+      }
+    })
+
   }
 
   getData(pageIndex: number,
@@ -124,7 +133,6 @@ export class ListUsersComponent implements OnInit {
         next: (response: usersData) => {
           this.data = response;
           this.msg = this.data.status;
-          console.log(response)
           if (this.msg != 200) {
             this.showError();
           }
@@ -143,7 +151,7 @@ export class ListUsersComponent implements OnInit {
   }
 
   length?: number;
-  pageSize: number = 5;
+  pageSize!: number;
   pageSizeOptions = [2, 5, 10];
 
   hidePageSize = false;

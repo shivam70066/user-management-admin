@@ -1,3 +1,0 @@
-const initialRole = {
-  role : "employee"
-}

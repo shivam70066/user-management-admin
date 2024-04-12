@@ -41,6 +41,10 @@ export class UsersService {
     return this.httpClient.put("http://localhost:3000/users/changePassword/"+id,data);
   }
 
+  addUser(data:any){
+    return this.httpClient.post('http://localhost:3000/users',data);
+  }
+
 
 
 }

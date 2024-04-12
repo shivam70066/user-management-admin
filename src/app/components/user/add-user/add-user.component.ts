@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import {
   FormControl,
@@ -18,6 +18,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2'
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UsersService } from '../../../services/users.service';
 
 
 @Component({
@@ -30,6 +31,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddUserComponent {
   hide: boolean = false;
+
+  userServices : UsersService = inject(UsersService);
 
   constructor(private builder: FormBuilder, private http: HttpClient, private router: Router,
     private toastr: ToastrService) {
@@ -54,23 +57,34 @@ export class AddUserComponent {
       return;
     }
     console.log(this.userform.value)
-    this.http.post<any>('http://localhost:3000/users', this.userform.value).subscribe(
-      response => {
-        console.log(response)
-        if (response.status == 200) {
+
+    this.userServices.addUser(this.userform.value).subscribe({
+      next: (resp:any)=>{
+        console.log(resp)
+        if (resp.status == 200) {
           this.toastr.success('User Added');
           this.router.navigate(['../users']);
-        }
 
-      },
-      error => {
+          const data={
+            name: this.userform.value.name,
+            email: this.userform.value.email,
+            password: this.userform.value.password
+          }
+
+          this.http.post('http://localhost:3000/mailer/reg_temp_backend',data).subscribe(
+            response=>{
+              console.log(response)
+            }
+          );
+        }
+      },error:(error:any)=>{
         if (error.status == 403) {
           this.showEmailAlreadyRegisterd();
           this.valid = true;
         }
         console.error('Error sending data:', error);
       }
-    );
+    })
   }
 
   showEmailAlreadyRegisterd() {

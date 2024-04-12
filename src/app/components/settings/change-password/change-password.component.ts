@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NavbarComponent } from "../../navbar/navbar.component";
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { selectID } from '../../../states/roleState/role.selector';
 import { UsersService } from '../../../services/users.service';
 import { ChangePasswordData } from '../../../../interfaces/interfaces';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-change-password',
@@ -23,13 +24,16 @@ import { ChangePasswordData } from '../../../../interfaces/interfaces';
   imports: [NavbarComponent, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
     MatRadioModule, HttpClientModule, RouterLink, MatIconModule]
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent implements OnInit{
 
   hide: boolean = false;
   hide2: boolean = false;
   id$?: Observable<number>;
   id: number = -1;
   userServices: UsersService = inject(UsersService);
+  http:HttpClient = inject(HttpClient);
+  authService: AuthService = inject(AuthService);
+
   constructor(private builder: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
@@ -43,6 +47,10 @@ export class ChangePasswordComponent {
     newPassword: this.builder.control('', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]),
   });
 
+  ngOnInit(): void {
+
+  }
+
 
   changePassword() {
     this.id$ = this.store.select(selectID);
@@ -53,9 +61,20 @@ export class ChangePasswordComponent {
     this.userServices.changePassword(this.userform.value,this.id).subscribe({
       next: (resp) => {
         this.toastr.success('Password changed successfully');
+        this.authService.me().subscribe({
+          next:(resp:any)=>{
+            const data ={
+              name: resp.data.name,
+              email: resp.data.email
+            }
+            this.http.post('http://localhost:3000/mailer/pass_change',data).subscribe();
+          }
+        })
+
         this.router.navigate(['../users']);
+
       },error:(error)=>{
-        this.toastr.error('Wrong credentials!');
+        this.toastr.error('Wrong password!');
       }
     })
   }

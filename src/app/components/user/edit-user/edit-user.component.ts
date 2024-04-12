@@ -55,19 +55,6 @@ export class EditUserComponent {
         return
       }
     });
-
-    // (data: any) => {
-    //   this.userData = data;
-    //   console.log(this.userData.data)
-    //   this.userform = this.builder.group({
-    //     name: this.builder.control(this.userData.data.user_name, [Validators.required, Validators.pattern('[a-zA-Z ]{3,}')]),
-    //     email: this.builder.control(this.userData.data.user_email, [Validators.required, Validators.email],),
-    //     number: this.builder.control(this.userData.data.user_number, [Validators.required, Validators.pattern('.{10,10}')]),
-    //     gender: new FormControl(this.userData.data.user_gender, [Validators.required]),
-    //     roleID: this.builder.control(this.userData.data.user_role_id, [Validators.required]),
-
-    //   });
-    // }
     this.isloading = false;
   }
 

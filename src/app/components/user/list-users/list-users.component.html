@@ -19,7 +19,7 @@
       <thead class="text-xs text-purple-700 uppercase bg-purple-50 dark:bg-purple-700 dark:text-gray-400"
         style="background-color: #673ab7;">
         <tr>
-          <th scope="col" class="px-6 py-3" style="width: 15%;">
+          <th scope="col" class="px-6 py-3" style="width: 13%;">
             <div style="display: flex; align-items: center;" id="header-div">
               <a (click)="sort('user_name')">Name</a>
               @if(sortBy=="user_name"){
@@ -32,7 +32,7 @@
               }
             </div>
           </th>
-          <th scope="col" class="px-6 py-3" style="width: 20%;">
+          <th scope="col" class="px-6 py-3" style="width: 18%;">
             <div style="display: flex; align-items: center;" id="header-div">
               <a (click)="sort('user_email')">Email</a>
               @if(sortBy=="user_email"){
@@ -49,7 +49,7 @@
           <th scope="col" class="px-6 py-3" style="width: 10%;">
             <div style="display: flex; align-items: center;" id="header-div">
               <a (click)="sort('user_role')">Role</a>
-              @if(sortBy=="user_number"){
+              @if(sortBy=="user_role"){
               @if(sortOrder=="asc"){
               <mat-icon style="font-size: 20px; color: rgb(182, 181, 181);">arrow_upward</mat-icon>
               }
@@ -165,7 +165,7 @@
         @empty {
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-          <td class="px-6 py-4 text-center text-xl text-red-400" colspan="7" rowspan="2">
+          <td class="px-6 py-4 text-center text-xl text-red-400" colspan="8" rowspan="2">
             No data found
           </td>
         </tr>
