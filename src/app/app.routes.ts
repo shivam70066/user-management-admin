@@ -10,6 +10,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { EditTemplateComponent } from './components/settings/edit-template/edit-template.component';
 import { authGuard } from './guards/auth.guard';
 import { ChangePasswordComponent } from './components/settings/change-password/change-password.component';
+import { EditDetailsComponent } from './components/settings/edit-details/edit-details.component';
+import { EditBasicSettingsComponent } from './components/settings/edit-basic-settings/edit-basic-settings.component';
 // import { UserComponent } from './components/user/user.component';
 
 export const routes: Routes = [
@@ -28,6 +30,9 @@ export const routes: Routes = [
   {path:'settings', children:[
     {path:'email-template/:slug', component: EditTemplateComponent},
     {path:'change-password', component: ChangePasswordComponent},
+    {path:'update-details', component: EditDetailsComponent},
+    {path:'basic-settings', component: EditBasicSettingsComponent},
+
 
   ],canActivate:[authGuard]},
 
